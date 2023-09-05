@@ -1,0 +1,12 @@
+.navbar{
+     background: #1A2238;
+    justify-content: space-between;
+}
+.notify-logo1{
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+.notify-logo2{
+    color: #FF6A3D;
+}

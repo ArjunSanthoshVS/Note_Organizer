@@ -1,0 +1,8 @@
+h1,h2,h3,h4,h5,h6{
+    font-family: cursive;
+    color: #1A2238;
+}
+.home-note{
+    color: #FF6A3D;
+    -webkit-text-stroke: 1px #1A2238
+}
