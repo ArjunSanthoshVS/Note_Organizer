@@ -14,24 +14,27 @@ const Edit = () => {
     title: "",
     content: "",
     date: "",
+    isImportant:false
   });
   
   useEffect(() => {
-    if (noteData) {
-      const note = JSON.parse(noteData);
-      setData(note);
-    }
+   if (noteData) {
+     const decodedNoteData = decodeURIComponent(noteData);
+     const note = JSON.parse(decodedNoteData);
+     setData(note);
+   }
   }, [noteData]);
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = event.target;
-    setData({ ...data, [name]: value });
+    const { name, value, type, checked } = event.target;
+    const newValue = type === "checkbox" ? checked : value;
+    setData({ ...data, [name]: newValue });
   };
   
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
     dispatch(editNote(data));
-    setData({ title: "", content: "", date: "" });
+    setData({ title: "", content: "", date: "" ,isImportant:false});
     alert("Updated Successfully...!");
   };
   
@@ -67,6 +70,17 @@ const Edit = () => {
               required
             />
           </div>
+          <div className="m-4">
+            <label>
+              <input className="me-1"
+                type="checkbox"
+                name="isImportant"
+                checked={data.isImportant}
+                onChange={handleChange}
+              />
+              Mark as Important
+            </label>
+          </div>
           <button type="submit" className="submit p-2 px-4">
             <b>Submit</b>
           </button>
@@ -78,7 +92,7 @@ const Edit = () => {
           <b>View all notes</b>
         </button>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

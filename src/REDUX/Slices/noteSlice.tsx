@@ -4,6 +4,7 @@ export type Note = {
   title: string;
   content: string;
   date: string;
+  isImportant:boolean
 };
 
 type NotesState = {

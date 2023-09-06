@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../REDUX/store/store";
@@ -14,14 +14,29 @@ const View = () => {
   const notesPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentFilter, setCurrentFilter] = useState("All"); // Added state for filter
 
   const filteredNotes = notes.filter((note) =>
     note.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Filter notes based on the current filter
+  const filteredNotesByFilter = filteredNotes.filter((note) => {
+    if (currentFilter === "All") {
+      return true;
+    } else if (currentFilter === "Normal") {
+      return !note.isImportant;
+    } else {
+      return note.isImportant;
+    }
+  });
+
   const indexOfLastNote = currentPage * notesPerPage;
   const indexOfFirstNote = indexOfLastNote - notesPerPage;
-  const currentNotes = filteredNotes.slice(indexOfFirstNote, indexOfLastNote);
+  const currentNotes = filteredNotesByFilter.slice(
+    indexOfFirstNote,
+    indexOfLastNote
+  );
 
   const handleDelete = (note: any) => {
     const date = note?.date;
@@ -30,7 +45,7 @@ const View = () => {
   };
 
   const handleEdit = (note: any) => {
-    const dataToPass = JSON.stringify(note);
+    const dataToPass = encodeURIComponent(JSON.stringify(note));
     navigate(`/edit/${dataToPass}`);
   };
 
@@ -45,17 +60,43 @@ const View = () => {
         <h1 className="m-5">
           Your <span className="home-note">Notes</span>...!
         </h1>
-
-        <div className="mb-3">
-          <input
-            type="text"
-            placeholder="Search notes..."
-            className="form-control"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <div className="row mb-3">
+          <div className="col-12 col-md-4 order-md-last mb-3">
+            <button
+              className={`category mx-2 px-3 p-1 ${
+                currentFilter === "All" ? "active" : ""
+              }`}
+              onClick={() => setCurrentFilter("All")}
+            >
+              All
+            </button>
+            <button
+              className={`category mx-2 px-3 p-1 ${
+                currentFilter === "Normal" ? "active" : ""
+              }`}
+              onClick={() => setCurrentFilter("Normal")}
+            >
+              Normal
+            </button>
+            <button
+              className={`category mx-2 px-3 p-1 ${
+                currentFilter === "Important" ? "active" : ""
+              }`}
+              onClick={() => setCurrentFilter("Important")}
+            >
+              Important
+            </button>
+          </div>
+          <div className="col-12 col-md-8 mb-3">
+            <input
+              type="text"
+              placeholder="Search notes..."
+              className="form-control"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
-
         <div className="row text-start">
           {currentNotes && currentNotes.length > 0 ? (
             currentNotes.map((note) => (
@@ -63,7 +104,15 @@ const View = () => {
                 <div className="card m-3 p-4 pb-2 border-4">
                   <h2 className="title">{note?.title}</h2>
                   <h4 className="content">{note?.content}</h4>
-                  <div className="mx-auto mt-3">
+                  <footer className="bg-light px-3 p-2 d-flex justify-content-between">
+                    {note.isImportant ? (
+                      <h6 className="text-danger">Important</h6>
+                    ) : (
+                      <h6></h6>
+                    )}
+                    {note.date}
+                  </footer>
+                  <div className="mx-auto mt-2">
                     <button
                       className="btn btn-primary m-2 px-3"
                       onClick={() => handleEdit(note)}
@@ -96,7 +145,7 @@ const View = () => {
           {notes.length > notesPerPage && (
             <ul className="pagination">
               {Array.from({
-                length: Math.ceil(filteredNotes.length / notesPerPage),
+                length: Math.ceil(filteredNotesByFilter.length / notesPerPage),
               }).map((item, index) => (
                 <li
                   key={index}
@@ -116,7 +165,7 @@ const View = () => {
           )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

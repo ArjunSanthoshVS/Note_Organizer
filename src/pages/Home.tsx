@@ -21,10 +21,16 @@ const Home = () => {
               Organiser...!
             </b>
           </h1>
-          <button className="create p-2 px-4 me-2" onClick={() => navigate("/create")}>
+          <button
+            className="create p-2 px-4 me-2"
+            onClick={() => navigate("/create")}
+          >
             <b>Create a new one</b>
           </button>
-          <button className="view p-2 px-4 ms-2" onClick={() => navigate("/view")}>
+          <button
+            className="view p-2 px-4 ms-2"
+            onClick={() => navigate("/view")}
+          >
             <b>View all notes</b>
           </button>
           <b>
@@ -40,6 +46,12 @@ const Home = () => {
                   <div className="card border-3 h-100 text-start p-3">
                     <h3 className="title">{note.title}</h3>
                     <h5 className="content">{note.content}</h5>
+                    <footer className="bg-light px-3 p-2 d-flex justify-content-between">
+                      {note.isImportant ? (
+                        <h6 className="text-danger">Important</h6>
+                      ):( <h6></h6>)}
+                      {note.date}
+                    </footer>
                   </div>
                 </div>
               ))
@@ -57,7 +69,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

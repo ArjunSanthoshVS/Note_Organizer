@@ -13,18 +13,19 @@ const Create = () => {
     title: "",
     content: "",
     date: "",
+    isImportant:false
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
-    const date = Date().toString();
+    const date = new Date().toLocaleString();
     setData({ ...data, date: date, [name]: value });
   };
 
   const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
     dispatch(addNote(data));
-    setData({ title: "", content: "", date: "" });
+    setData({ title: "", content: "", date: "", isImportant:false });
     alert("Note created Successfully...!");
   };
 
@@ -60,15 +61,31 @@ const Create = () => {
               required
             />
           </div>
+          <div className="m-4">
+            <label>
+              <input
+              className="me-1"
+                type="checkbox"
+                name="isImportant"
+                checked={data.isImportant}
+                onChange={handleChange}
+              />
+              Mark as Important
+            </label>
+          </div>
+
           <button type="submit" className="submit p-2 px-4">
             <b>Submit</b>
           </button>
         </form>
-        <button className="view p-2 px-4 mt-4" onClick={() => navigate("/view")}>
+        <button
+          className="view p-2 px-4 mt-4"
+          onClick={() => navigate("/view")}
+        >
           <b>View all notes</b>
         </button>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

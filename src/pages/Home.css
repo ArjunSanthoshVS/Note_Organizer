@@ -42,3 +42,12 @@ transition: 0.5s;
 .content-container {
     margin-bottom: 100px;
 }
+.category{
+    background-color: #FF6A3D;
+        color: white;
+        transition: 0.5s;
+}
+.category:hover{
+    background-color: #1A2238;
+        color: white;
+}
