@@ -47,7 +47,7 @@ const Home = () => {
               <>
                 <h2>There is no notes...!</h2>
                 <button
-                  className=" create p-2 px-4 mx-auto m-3 w-auto"
+                  className="create p-2 px-4 mx-auto m-3 w-auto"
                   onClick={() => navigate("/create")}
                 >
                   <b>Create a new one</b>

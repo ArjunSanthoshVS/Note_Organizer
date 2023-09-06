@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../REDUX/store/store";
 import { deleteNote } from "../REDUX/Slices/noteSlice";
 import { useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import Footer from "../components/Footer";
 
 const View = () => {
@@ -84,12 +83,12 @@ const View = () => {
           ) : (
             <>
               <h2 className="text-center">There are no notes...!</h2>
-              <Button
-                className="p-2 px-4 mx-auto m-3 w-auto"
+              <button
+                className="create p-2 px-4 mx-auto m-3 w-auto"
                 onClick={() => navigate("/create")}
               >
                 <b>Create a new one</b>
-              </Button>
+              </button>
             </>
           )}
         </div>

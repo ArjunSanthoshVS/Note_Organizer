@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import Navbar from "../components/Navbar";
 import { useNavigate, useParams } from "react-router-dom";
 import { editNote } from "../REDUX/Slices/noteSlice";
-import { Button } from "react-bootstrap";
 import Footer from "../components/Footer";
 
 const Edit = () => {
