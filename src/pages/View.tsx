@@ -108,7 +108,7 @@ const View = () => {
                     {note.isImportant ? (
                       <h6 className="text-danger">Important</h6>
                     ) : (
-                      <h6></h6>
+                      <h6> </h6>
                     )}
                     {note.date}
                   </footer>

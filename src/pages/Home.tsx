@@ -49,7 +49,7 @@ const Home = () => {
                     <footer className="bg-light px-3 p-2 d-flex justify-content-between">
                       {note.isImportant ? (
                         <h6 className="text-danger">Important</h6>
-                      ):( <h6></h6>)}
+                      ):( <h6> </h6>)}
                       {note.date}
                     </footer>
                   </div>
