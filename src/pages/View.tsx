@@ -5,6 +5,7 @@ import { RootState } from "../REDUX/store/store";
 import { deleteNote } from "../REDUX/Slices/noteSlice";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Footer from "../components/Footer";
 
 const View = () => {
   const notes = useSelector((state: RootState) => state.notes.notes);
@@ -41,8 +42,10 @@ const View = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <h1 className="m-5">Your Notes...!</h1>
+      <div className="container content-container">
+        <h1 className="m-5">
+          Your <span className="home-note">Notes</span>...!
+        </h1>
 
         <div className="mb-3">
           <input
@@ -59,8 +62,8 @@ const View = () => {
             currentNotes.map((note) => (
               <div className="col" key={note?.date}>
                 <div className="card m-3 p-4 pb-2 border-4">
-                  <h2>{note?.title}</h2>
-                  <h4>{note?.content}</h4>
+                  <h2 className="title">{note?.title}</h2>
+                  <h4 className="content">{note?.content}</h4>
                   <div className="mx-auto mt-3">
                     <button
                       className="btn btn-primary m-2 px-3"
@@ -114,6 +117,7 @@ const View = () => {
           )}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

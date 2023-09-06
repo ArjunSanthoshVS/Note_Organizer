@@ -7,7 +7,9 @@ const Navbar = () => {
           Not<span className="notify-logo2">i</span>fy
         </h1>
       </div>
-      <div className="right my-auto">hdfsjkb</div>
+      <div className="right my-auto">
+        Made by <span className="notify-logo2">Arjun</span> Santhosh
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addNote } from "../REDUX/Slices/noteSlice";
+import Footer from "../components/Footer";
 
 const Create = () => {
   const navigate = useNavigate();
@@ -32,7 +33,9 @@ const Create = () => {
     <>
       <Navbar />
       <div className="container">
-        <h2>Create Notes</h2>
+        <h2>
+          Create <span className="home-note">Notes</span>
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="m-4">
             <label htmlFor="title">Title:</label>
@@ -58,14 +61,15 @@ const Create = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="submit p-2 px-4">
             <b>Submit</b>
           </button>
         </form>
-        <Button className="p-2 px-4 mt-4" onClick={() => navigate("/view")}>
+        <button className="view p-2 px-4 mt-4" onClick={() => navigate("/view")}>
           <b>View all notes</b>
-        </Button>
+        </button>
       </div>
+      <Footer/>
     </>
   );
 };

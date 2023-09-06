@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate, useParams } from "react-router-dom";
 import { editNote } from "../REDUX/Slices/noteSlice";
 import { Button } from "react-bootstrap";
+import Footer from "../components/Footer";
 
 const Edit = () => {
   const navigate = useNavigate();
@@ -39,7 +40,9 @@ const Edit = () => {
     <>
       <Navbar />
       <div className="container">
-        <h2>Edit Notes</h2>
+        <h2>
+          Edit <span className="home-note">Notes</span>
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="m-4">
             <label htmlFor="title">Title:</label>
@@ -65,14 +68,18 @@ const Edit = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="submit p-2 px-4">
             <b>Submit</b>
           </button>
         </form>
-        <Button className="p-2 px-4 mt-4" onClick={() => navigate("/view")}>
+        <button
+          className="view p-2 px-4 mt-4"
+          onClick={() => navigate("/view")}
+        >
           <b>View all notes</b>
-        </Button>
+        </button>
       </div>
+      <Footer/>
     </>
   );
 };
